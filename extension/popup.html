@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { width: 300px; font-family: sans-serif; padding: 15px; text-align: center; }
+        input { width: 90%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        
+        /* Primary Button (Lock In) */
+        #saveBtn { background: #ff4757; color: white; width: 100%; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-bottom: 5px;}
+        #saveBtn:hover { background: #ff6b81; }
+
+        /* Secondary Button (Task Done) */
+        #clearBtn { background: #2ed573; color: white; width: 100%; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold; display: none; }
+        #clearBtn:hover { background: #7bed9f; }
+
+        h2 { margin-top: 0; }
+    </style>
+</head>
+<body>
+    <h2>🎯 Focus Goal</h2>
+    <input type="text" id="goalInput" placeholder="e.g. Study for Algorithms">
+    
+    <button id="saveBtn">Lock In 🔒</button>
+    <button id="clearBtn">Mission Complete ✅</button>
+    
+    <p id="status" style="color: green; font-size: 12px; height: 15px;"></p>
+    <script src="popup.js"></script>
+</body>
+</html>

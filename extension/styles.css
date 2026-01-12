@@ -1,0 +1,11 @@
+button { 
+    padding: 15px 30px; 
+    font-size: 1.2rem; 
+    cursor: pointer; 
+    background: white; 
+    color: black; /* Ensure text is black */
+    border: none; 
+    border-radius: 50px; 
+    font-weight: bold; 
+    display: inline-block; /* Fix layout */
+}
