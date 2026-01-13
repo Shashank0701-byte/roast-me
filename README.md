@@ -69,7 +69,7 @@ Enter a goal (e.g., "Finish my Resume").
 Click Lock In 🔒.
 Try to open Twitter or Instagram.
 Get destroyed.
-
+```
 
 License
 MIT License. Feel free to fork this and make it even meaner.
