@@ -24,13 +24,25 @@
     <button id="saveBtn">Lock In 🔒</button>
     <button id="clearBtn">Mission Complete ✅</button>
     
+    <div id="shameSection" style="display: none; margin-top: 15px; border-top: 1px solid #ccc; padding-top: 10px;">
+        <p style="color: #d63031; font-weight: bold; font-size: 13px;">Giving up already?</p>
+        <p style="font-size: 11px; color: #636e72; margin-bottom: 5px;">Type this to unlock:</p>
+        
+        <code style="display: block; background: #eee; padding: 5px; margin-bottom: 5px; font-size: 11px; color: #d63031;">I am weak and lazy</code>
+        
+        <input type="text" id="shameInput" placeholder="Type the phrase..." style="width: 90%; font-size: 12px;">
+        <button id="confirmShameBtn" style="background: #636e72; margin-top: 5px; width: 100%;">Unlock Shamefully 🔓</button>
+    </div>
+    
     <p id="status" style="color: green; font-size: 12px; height: 15px;"></p>
+
     <div id="shameBox" style="background: #f1f2f6; padding: 10px; border-radius: 8px; margin-top: 10px; transition: 0.3s;">
-        <p id="shameTitle" style="margin: 0; font-weight: bold; font-size: 14px;">Safe... for now</p>    
+        <p id="shameTitle" style="margin: 0; font-weight: bold; font-size: 14px;">Safe... for now</p>
         <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.8;">
             Times caught lacking: <b id="doomCount">0</b>
         </p>
     </div>
+
     <script src="popup.js"></script>
 </body>
 </html>

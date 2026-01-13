@@ -3,8 +3,8 @@ const saveBtn = document.getElementById("saveBtn");
 const clearBtn = document.getElementById("clearBtn");
 const status = document.getElementById("status");
 
-// 1. Load saved goal & Doomscroll stats
-chrome.storage.local.get(["focusGoal", "doomscrollCount"], (result) => {
+// 1. Load saved goal & Doomscroll stats with DAILY CHECK
+chrome.storage.local.get(["focusGoal", "doomscrollCount", "lastResetDate"], (result) => {
     
     // --- A. Handle Goal UI State ---
     if (result.focusGoal) {
@@ -15,8 +15,17 @@ chrome.storage.local.get(["focusGoal", "doomscrollCount"], (result) => {
     }
 
     // --- B. Handle Shame Rank UI ---
-    // This logic MUST be inside here to access 'result'
-    const count = result.doomscrollCount || 0;
+    // Check Date for Daily Reset
+    const today = new Date().toDateString();
+    const lastDate = result.lastResetDate || today;
+    let count = result.doomscrollCount || 0;
+
+    // If date changed, reset the view to 0 (storage updates on next roast)
+    if (lastDate !== today) {
+        count = 0;
+        chrome.storage.local.set({ "doomscrollCount": 0, "lastResetDate": today });
+    }
+
     const countElement = document.getElementById("doomCount");
     const shameBox = document.getElementById("shameBox");
     const shameTitle = document.getElementById("shameTitle");
@@ -70,15 +79,31 @@ saveBtn.addEventListener("click", () => {
     }
 });
 
-// 3. Mission Complete Logic
-clearBtn.addEventListener("click", () => {
-    chrome.storage.local.remove("focusGoal", () => {
-        status.innerText = "You are free! 🎉";
+// 3. Walk of Shame Logic
+const shameSection = document.getElementById("shameSection");
+const shameInput = document.getElementById("shameInput");
+const confirmShameBtn = document.getElementById("confirmShameBtn");
 
-        goalInput.value = "";
-        goalInput.disabled = false;
-        saveBtn.style.display = "block";
-        clearBtn.style.display = "none";
-        setTimeout(() => window.close(), 1000);
-    });
+clearBtn.addEventListener("click", () => {
+    clearBtn.style.display = "none";
+    shameSection.style.display = "block";
+});
+
+confirmShameBtn.addEventListener("click", () => {
+    if (shameInput.value.toLowerCase() === "i am weak and lazy") {
+        chrome.storage.local.remove("focusGoal", () => {
+            status.innerText = "You are free... but at what cost?";
+            goalInput.value = "";
+            goalInput.disabled = false;
+            saveBtn.style.display = "block";
+            shameSection.style.display = "none"; // Hide shame section
+            shameInput.value = ""; // Clear input
+
+            setTimeout(() => window.close(), 1500);
+        });
+    } else {
+        // Wrong typo
+        status.innerText = "Type it exactly. Own your failure.";
+        status.style.color = "red";
+    }
 });

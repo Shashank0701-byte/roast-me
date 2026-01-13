@@ -41,12 +41,20 @@ chrome.storage.local.get(["focusGoal", "doomscrollCount", "lastResetDate"], asyn
         const roast = data.roast;
 
         // 🔊 THE VOICE OF JUDGMENT (Audio Guilt)
-        // This makes the browser speak the roast text out loud
         const speech = new SpeechSynthesisUtterance(roast);
         speech.lang = "en-US";
-        speech.rate = 0.9;  // Slightly slower for dramatic effect
-        speech.pitch = 0.8; // Deeper, more judgmental voice
+        speech.rate = 0.9;
+        speech.pitch = 0.8;
         window.speechSynthesis.speak(speech);
+
+        // 🖼️ GALLERY OF DISAPPOINTMENT (Random GIFs)
+        const gifs = [
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5ZnI5eG52aWZ0aG94aDk5aXl5eW52aWZ0aG94aDk5aXl5eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/iJJ6E58EttmSqgLo96/giphy.gif", // Picard Facepalm
+            "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z5ZnI5eG52aWZ0aG94aDk5aXl5eW52aWZ0aG94aDk5aXl5eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oAt21Fnr4i54uK8vK/giphy.gif", // Obama disappointed
+            "https://media.giphy.com/media/l3vR4CdLInXOhr3rO/giphy.gif", // The Office stare
+            "https://media.giphy.com/media/3o85xnoIXebk3xYx4Q/giphy.gif" // Gordon Ramsay
+        ];
+        const randomGif = gifs[Math.floor(Math.random() * gifs.length)];
 
         // Replace the WHOLE page with the Roast UI
         document.body.innerHTML = `
@@ -54,15 +62,16 @@ chrome.storage.local.get(["focusGoal", "doomscrollCount", "lastResetDate"], asyn
                 <div class="roast-container">
                     <h1>🛑 STOP.</h1>
                     <p class="goal-text">You said you would: <b>${goal}</b></p>
-                    <div class="roast-box">
-                        "${roast}"
-                    </div>
+                    
+                    <img src="${randomGif}" style="width: 300px; border-radius: 10px; margin-bottom: 20px;">
+
+                    <div class="roast-box">"${roast}"</div>
                     <button onclick="window.close()">I'll go back to work 😔</button>
                 </div>
             </div>
         `;
         
-        // Inject styles dynamically (since we wiped the head)
+        // Inject styles dynamically
         const style = document.createElement('style');
         style.textContent = `
             body { margin: 0; background-color: #1a1a1a; color: white; font-family: 'Arial', sans-serif; }
@@ -72,13 +81,12 @@ chrome.storage.local.get(["focusGoal", "doomscrollCount", "lastResetDate"], asyn
             .goal-text { font-size: 1.2rem; color: #aaa; margin-bottom: 30px; }
             .roast-box { font-size: 2rem; font-weight: bold; line-height: 1.4; margin-bottom: 40px; color: #fff; font-style: italic; }
             
-            /* Button Styling - Updated for visibility */
             button { 
                 padding: 15px 30px; 
                 font-size: 1.2rem; 
                 cursor: pointer; 
                 background: white; 
-                color: black; /* Force black text */
+                color: black; 
                 border: none; 
                 border-radius: 50px; 
                 font-weight: bold; 
