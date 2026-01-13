@@ -1,10 +1,28 @@
-// Check if user has a goal set
-chrome.storage.local.get(["focusGoal", "doomscrollCount"], async (result) => {
+// Check if user has a goal set AND handle Daily Reset
+chrome.storage.local.get(["focusGoal", "doomscrollCount", "lastResetDate"], async (result) => {
     const goal = result.focusGoal;
+    
+    // If no goal is set, let them scroll in peace.
     if (!goal) return;
+
+    // 🗓️ DAILY RESET LOGIC
+    const today = new Date().toDateString(); // e.g., "Wed Jan 14 2026"
+    const lastDate = result.lastResetDate || today;
     let count = result.doomscrollCount || 0;
-    count++;
-    chrome.storage.local.set({ "doomscrollCount": count });
+
+    if (lastDate !== today) {
+        // It's a new day! Reset the shame counter.
+        count = 1; 
+    } else {
+        // Same day, keep stacking the shame.
+        count++;
+    }
+
+    // Save the new count AND the date
+    chrome.storage.local.set({ 
+        "doomscrollCount": count, 
+        "lastResetDate": today 
+    });
 
     // UI: Immediately hide the page content to prevent "doomscrolling" while we fetch
     document.body.innerHTML = `<div style="background:black; height:100vh; display:flex; justify-content:center; align-items:center; color:white; font-family:sans-serif;"><h1>Judging you... 👀</h1></div>`;
@@ -22,7 +40,15 @@ chrome.storage.local.get(["focusGoal", "doomscrollCount"], async (result) => {
         const data = await response.json();
         const roast = data.roast;
 
-        // Replace the WHOLE page with the Roast
+        // 🔊 THE VOICE OF JUDGMENT (Audio Guilt)
+        // This makes the browser speak the roast text out loud
+        const speech = new SpeechSynthesisUtterance(roast);
+        speech.lang = "en-US";
+        speech.rate = 0.9;  // Slightly slower for dramatic effect
+        speech.pitch = 0.8; // Deeper, more judgmental voice
+        window.speechSynthesis.speak(speech);
+
+        // Replace the WHOLE page with the Roast UI
         document.body.innerHTML = `
             <div class="roast-overlay">
                 <div class="roast-container">
@@ -45,8 +71,21 @@ chrome.storage.local.get(["focusGoal", "doomscrollCount"], async (result) => {
             h1 { font-size: 4rem; margin: 0 0 20px 0; color: #ff4757; text-transform: uppercase; letter-spacing: 5px; }
             .goal-text { font-size: 1.2rem; color: #aaa; margin-bottom: 30px; }
             .roast-box { font-size: 2rem; font-weight: bold; line-height: 1.4; margin-bottom: 40px; color: #fff; font-style: italic; }
-            button { padding: 15px 30px; font-size: 1.2rem; cursor: pointer; background: white; border: none; border-radius: 50px; font-weight: bold; transition: transform 0.2s; }
-            button:hover { transform: scale(1.05); }
+            
+            /* Button Styling - Updated for visibility */
+            button { 
+                padding: 15px 30px; 
+                font-size: 1.2rem; 
+                cursor: pointer; 
+                background: white; 
+                color: black; /* Force black text */
+                border: none; 
+                border-radius: 50px; 
+                font-weight: bold; 
+                transition: transform 0.2s; 
+                display: inline-block;
+            }
+            button:hover { transform: scale(1.05); background-color: #f1f2f6; }
         `;
         document.head.appendChild(style);
 
