@@ -5,10 +5,6 @@
 Most site blockers are polite. They show a nice quote or a blank screen. You just turn them off.
 **Focus-Roast** is different. It uses AI to bully you into working.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/e2bf54d7-c13c-4dca-9afe-d28cb6b4f4e2" alt="Focus Roast Red Screen" width="100%" />
-</p>
-
 <table align="center" style="border: none;">
   <tr>
     <td align="center" style="border: none;">
@@ -19,10 +15,16 @@ Most site blockers are polite. They show a nice quote or a blank screen. You jus
     <td align="center" style="border: none;">
       <img src="https://github.com/user-attachments/assets/ccbfb605-26a0-4653-8f2a-d9dcaa52f3fb" alt="Popup Locked In" height="400" />
       <br />
-      <b>Step 2: Get Roasted</b>
+      <b>Step 2: Confirm goal</b>
     </td>
   </tr>
 </table>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e2bf54d7-c13c-4dca-9afe-d28cb6b4f4e2" alt="Focus Roast Red Screen" width="100%" />
+  <br />
+      <b>Step 3: Get Roasted</b>
+</p>
 
 ##  Features
 
