@@ -1,4 +1,4 @@
-# Focus-Roast 🔥
+# Focus-Roast 
 
 **The meanest productivity tool on the internet.**
 
@@ -7,7 +7,7 @@ Most site blockers are polite. They show a nice quote or a blank screen. You jus
 
 ![Demo](https://via.placeholder.com/800x400?text=Insert+Screenshot+of+Red+Screen)
 
-## 😈 Features
+##  Features
 
 * **Context-Aware Roasts:** It reads your goal (e.g., "Study Calculus") and the site you are procrastinating on (e.g., "Instagram"), then generates a savage insult using **Gemini AI**.
 * **Audio Guilt 🔊:** It uses Text-to-Speech to read the roast out loud. Good luck scrolling in the library.
@@ -18,11 +18,11 @@ Most site blockers are polite. They show a nice quote or a blank screen. You jus
     * *3-5:* Certified Clown 🤡
     * *10+:* Oxygen Thief 💀
 
-## 🛠️ How to Run (Local Setup)
+##  How to Run (Local Setup)
 
 I built this to run locally so your browsing data stays private (and free).
 
-### 1. The Brain (Backend) 🧠
+### 1. The Brain (Backend) 
 ```bash
 # Clone the repo
 git clone [https://github.com/YOUR_USERNAME/focus-roast.git](https://github.com/YOUR_USERNAME/focus-roast.git)
