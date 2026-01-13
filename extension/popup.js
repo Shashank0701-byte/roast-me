@@ -3,14 +3,16 @@ const saveBtn = document.getElementById("saveBtn");
 const clearBtn = document.getElementById("clearBtn");
 const status = document.getElementById("status");
 
-// 1. Load saved goal & Toggle Buttons
-chrome.storage.local.get(["focusGoal"], (result) => {
+// 1. Load saved goal & Doomscroll stats
+chrome.storage.local.get(["focusGoal", "doomscrollCount"], (result) => {
     if (result.focusGoal) {
         goalInput.value = result.focusGoal;
-        goalInput.disabled = true; // Disable editing while locked
+        goalInput.disabled = true;
         saveBtn.style.display = "none";
         clearBtn.style.display = "block";
     }
+    const count = result.doomscrollCount || 0;
+    document.getElementById("doomCount").innerText = count;
 });
 
 // 2. Lock In Logic

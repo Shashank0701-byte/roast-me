@@ -1,9 +1,10 @@
 // Check if user has a goal set
-chrome.storage.local.get(["focusGoal"], async (result) => {
+chrome.storage.local.get(["focusGoal", "doomscrollCount"], async (result) => {
     const goal = result.focusGoal;
-    
-    // If no goal is set, let them scroll in peace.
     if (!goal) return;
+    let count = result.doomscrollCount || 0;
+    count++;
+    chrome.storage.local.set({ "doomscrollCount": count });
 
     // UI: Immediately hide the page content to prevent "doomscrolling" while we fetch
     document.body.innerHTML = `<div style="background:black; height:100vh; display:flex; justify-content:center; align-items:center; color:white; font-family:sans-serif;"><h1>Judging you... 👀</h1></div>`;
